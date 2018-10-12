@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"-->
+          <!--integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">-->
+
+    <!-- Bootstrap -->
+    <link href="../static/bootstrap-4.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="../static/bootstrap-4.1.1-dist/js/jquery-3.3.1.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../static/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        body {
+            margin-top: 76px;
+            background: lemonchiffon;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <button class="btn btn-outline-success my-2 my-sm-0" id="openCreateWindow">创建表格</button>
+{#    <ul class="navbar-nav">#}
+{#        <button class="btn btn-outline-success my-2 my-sm-0">创建表格</button>#}
+{#        <li class="nav-item">#}
+{#            <a class="nav-link" href="#">Link</a>#}
+{#        </li>#}
+{#        <li class="nav-item">#}
+{#            <a class="nav-link" href="#">Link</a>#}
+{#        </li>#}
+{#        <li class="nav-item">#}
+{#            <a class="nav-link disabled" href="#">Disabled</a>#}
+{#        </li>#}
+{#    </ul>#}
+</nav>
+<div class="container-fluid row" id="tables">
+    {% for table in tables %}
+        <div class="col-3">
+            <div class="card shadow">
+                <h4 class="bg-success card-header font-weight-normal text-light">{{ table.name }}</h4>
+                <div class="card-body">
+                    <p class="card-text">{{ table.presentation }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    
+
+{#    <div class="col-3">#}
+{#        <div class="card shadow">#}
+{#            <h4 class="bg-success card-header font-weight-normal text-light">这是一个表格啊</h4>#}
+{#            <div class="card-body">#}
+{#                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional#}
+{#                    content. This content is a little bit longer.</p>#}
+{#                <div class="d-flex justify-content-between align-items-center">#}
+{##}
+{#                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>#}
+{#                    <div class="btn-group">#}
+{#                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
+{#                        <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <form class="container" id="tableContent" action="./createTable">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">表格</h4>
+                    </div>
+
+                    <div class="modal-body">
+                    <div class="form-label-group">
+                        <label for="title">标题</label>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Email address" required="" autofocus="">
+                    </div>
+
+                    <div class="form-label-group">
+                        <label for="presentation">内容说明</label>
+                        <textarea class="container" id="presentation" name="presentation"></textarea>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="summitCreateTable">提交更改</button>
+                    </div>
+                </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+    <script src="../static/app/js/index.js"></script>
+</body>
+</html>
