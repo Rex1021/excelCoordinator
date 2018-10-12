@@ -10,9 +10,11 @@ def index(request):
     # request.POST
     # request.GET
     # return HttpResponse("Hello word")
-    tables = models.ExcelTable.objects.all();
+
+    print(request.path)
+    tables = models.ExcelTable.objects.all()
     return render(request, "index.html", {"tables": tables})
 
 # def createTable(request):
 #
-#
+
