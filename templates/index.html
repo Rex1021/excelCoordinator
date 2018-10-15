@@ -93,7 +93,8 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-                <form class="container" id="tableContent" action="./createTable">
+                <form class="container" id="tableContent" action="./createTable" method="post">
+                    {% csrf_token %}
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">表格</h4>
                     </div>
