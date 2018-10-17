@@ -19,6 +19,9 @@ from ec import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('index/', views.index),
-    re_path(r'^index/.*$', views.index)
+    path('index/', views.index),
+    path('index/editTable/', views.edit_table),
+    path('index/deleteTable/<int:tabid>/', views.delete_table),
+    path('table/', views.view_table),
+    # re_path(r'^index/.*$', views.index)
 ]

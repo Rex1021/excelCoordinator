@@ -8,7 +8,7 @@
     <title>Bootstrap 101 Template</title>
 
     <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"-->
-          <!--integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">-->
+    <!--integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">-->
 
     <!-- Bootstrap -->
     <link href="../static/bootstrap-4.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,57 +34,57 @@
 <body oncontextmenu="return false">
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <button class="btn btn-outline-success my-2 my-sm-0" id="openCreateWindow">创建表格</button>
-{#    <ul class="navbar-nav">#}
-{#        <button class="btn btn-outline-success my-2 my-sm-0">创建表格</button>#}
-{#        <li class="nav-item">#}
-{#            <a class="nav-link" href="#">Link</a>#}
-{#        </li>#}
-{#        <li class="nav-item">#}
-{#            <a class="nav-link" href="#">Link</a>#}
-{#        </li>#}
-{#        <li class="nav-item">#}
-{#            <a class="nav-link disabled" href="#">Disabled</a>#}
-{#        </li>#}
-{#    </ul>#}
+    {#    <ul class="navbar-nav">#}
+    {#        <button class="btn btn-outline-success my-2 my-sm-0">创建表格</button>#}
+    {#        <li class="nav-item">#}
+    {#            <a class="nav-link" href="#">Link</a>#}
+    {#        </li>#}
+    {#        <li class="nav-item">#}
+    {#            <a class="nav-link" href="#">Link</a>#}
+    {#        </li>#}
+    {#        <li class="nav-item">#}
+    {#            <a class="nav-link disabled" href="#">Disabled</a>#}
+    {#        </li>#}
+    {#    </ul>#}
 </nav>
 <div class="container-fluid row" id="tables">
     {% for table in tables %}
-        <div class="col-3">
+        <div class="col-3" tabid="{{ table.id }}">
             <div class="card shadow">
                 <h4 class="bg-success card-header font-weight-normal text-light">{{ table.name }}</h4>
                 <div class="card-body">
                     <p class="card-text">{{ table.presentation }}</p>
                     <div class="d-flex justify-content-between align-items-center">
 
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" name="view" class="btn btn-sm btn-outline-secondary">View</button>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                            <button type="button" name="edit" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            <button type="button" name="delete" class="btn btn-sm btn-outline-secondary">Delete</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     {% endfor %}
-    
 
-{#    <div class="col-3">#}
-{#        <div class="card shadow">#}
-{#            <h4 class="bg-success card-header font-weight-normal text-light">这是一个表格啊</h4>#}
-{#            <div class="card-body">#}
-{#                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional#}
-{#                    content. This content is a little bit longer.</p>#}
-{#                <div class="d-flex justify-content-between align-items-center">#}
-{##}
-{#                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>#}
-{#                    <div class="btn-group">#}
-{#                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
-{#                        <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+
+    {#    <div class="col-3">#}
+    {#        <div class="card shadow">#}
+    {#            <h4 class="bg-success card-header font-weight-normal text-light">这是一个表格啊</h4>#}
+    {#            <div class="card-body">#}
+    {#                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional#}
+    {#                    content. This content is a little bit longer.</p>#}
+    {#                <div class="d-flex justify-content-between align-items-center">#}
+    {##}
+    {#                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>#}
+    {#                    <div class="btn-group">#}
+    {#                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
+    {#                        <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
 
 
 </div>
@@ -93,33 +93,35 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-                <form class="container" id="tableContent" action="./createTable" method="post">
-                    {% csrf_token %}
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">表格</h4>
-                    </div>
+            <form class="container" id="tableContent">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">表格</h4>
+                </div>
 
-                    <div class="modal-body">
+                <div class="modal-body">
+                    <input name="id" type="hidden" id="id"/>
                     <div class="form-label-group">
                         <label for="title">标题</label>
-                        <input type="text" name="title" id="title" class="form-control" placeholder="Email address" required="" autofocus="">
+                        <input type="text" name="title" id="title" class="form-control" required="" autofocus="">
                     </div>
 
                     <div class="form-label-group">
                         <label for="presentation">内容说明</label>
                         <textarea class="container" id="presentation" name="presentation"></textarea>
                     </div>
-                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" id="summitCreateTable">提交</button>
+                        <button type="button" class="btn btn-primary" id="summitTable">提交</button>
                     </div>
-                </form>
+                </div>
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 
-    <script src="../static/app/js/index.js"></script>
+<script src="../static/app/js/index.js"></script>
 </body>
 </html>

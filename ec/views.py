@@ -13,29 +13,40 @@ def index(request):
     # request.POST
     # request.GET
     # return HttpResponse("Hello word")
-    if "/index/" == request.path:
-        return find_all_tables(request)
-    if "/index/createTable" == request.path:
-        return create_table(request)
-    return HttpResponse("something wrong")
-
-
-def find_all_tables(request):
+    # if "/index/" == request.path:
+    #     return find_all_tables(request)
+    # if "/index/createTable" == request.path:
+    #     return create_table(request)
+    # return HttpResponse("something wrong")
     tables = models.ExcelTable.objects.all()
     return render(request, "index.html", {"tables": tables})
 
 
-def create_table(request):
+def edit_table(request):
+    tid = request.POST.get("id")
     title = request.POST.get("title")
     presentation = request.POST.get("presentation")
-    print(title, presentation)
     try:
-        table = models.ExcelTable.objects.create(name=title, presentation=presentation)
+        if "" == tid:
+            table = models.ExcelTable.objects.create(name=title, presentation=presentation)
+        else:
+            table = models.ExcelTable.objects.get(id=tid)
+            table.name = title
+            table.presentation = presentation
         table.save()
-        return HttpResponseRedirect("/index/")
+        return HttpResponse("ok")
     except IntegrityError as msg:
-        print(msg)
-        return HttpResponse("<javascript>alert('1111')<javascript>")
+        return HttpResponse(msg)
 
 
+def delete_table(request, tabid):
+    try:
+        table = models.ExcelTable.objects.get(id=tabid)
+        table.delete()
+        return HttpResponse("ok")
+    except Exception as msg:
+        return HttpResponse(msg)
 
+
+def view_table(request):
+    return render(request, "table.html")
