@@ -168,4 +168,10 @@ $(function () {
         tds.parent().remove();
         utils.freshTableIndex();
     });
+
+
+    //保存
+    $("#save").click(function () {
+        var html = $("#tableBody").html();
+    })
 });
