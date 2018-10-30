@@ -9,10 +9,16 @@
 
     <!-- Bootstrap -->
     <link href="../static/bootstrap-4.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap-4.1.1-dist/css/bootstrap-editable.css" rel="stylesheet">
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-    <script src="../static/bootstrap-4.1.1-dist/js/jquery-3.3.1.min.js"></script>
+{#    <script src="../static/bootstrap-4.1.1-dist/js/jquery-3.3.1.min.js"></script>#}
+    <script src="../static/bootstrap-4.1.1-dist/js/jquery-3.3.1.slim.min.js"></script>
+
+    <script src="../static/bootstrap-4.1.1-dist/js/popper.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="../static/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
+
+    <script src="../static/bootstrap-4.1.1-dist/js/bootstrap-editable.js"></script>
 
     <!--<script src="./bootstrap-4.1.1-dist/js/vue.js"></script>-->
     <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
@@ -26,6 +32,10 @@
     <style type="text/css">
         body {
             margin-top: 56px
+        }
+        td {
+            height: 30px;
+            width: 100px;
         }
     </style>
 </head>
@@ -50,21 +60,23 @@
     </div>
 
 </nav>
-
 <div id="mainDiv" class="table-responsive">
-    <table class="table table-bordered table-striped table-hover">
-        <thead>
-        <tr id="tableHead">
-            <th id="rowNumber">#</th>
-            <th>A</th>
-            <th>B</th>
-            <th>C</th>
-            <th>D</th>
-            <th>E</th>
-        </tr>
-        </thead>
-        <tbody id="tableBody">
-        </tbody>
+    <input name="tabid" type="hidden" id="tabid" value="{{ tabid }}"/>
+{#    <table class="table table-bordered table-striped table-hover" id="table">#}
+{#        <tr id="tableHead">#}
+{#            <th id="rowNumber">#</th>#}
+{#            <th>A</th>#}
+{#            <th>B</th>#}
+{#            <th>C</th>#}
+{#            <th>D</th>#}
+{#            <th>E</th>#}
+{#        </tr>#}
+{#        <tbody id="tableBody"></tbody>#}
+
+    <table class="table-bordered" id="table" style="overflow: auto">
+            {% autoescape off %}
+                {{ tableData }}
+            {% endautoescape %}
     </table>
     <div id="itemMenu" class="dropdown-menu" style="display:none">
         <li class="dropdown-item" style="display:none" name="numberCell" id="insertRow">插入行</li>
@@ -76,6 +88,27 @@
         <li class="dropdown-item" id="deleteColumn">删除列</li>
     </div>
 </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="confirmWin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="myModalLabel">确认</h6>
+            </div>
+            <div class="modal-body">
+                确认保存表格吗?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="confirm">确认</button>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
 <script src="../static/app/js/table.js"></script>
 </body>
 </html>

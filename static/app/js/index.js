@@ -60,7 +60,9 @@ $(function(){
     });
 
     $("#tables").on("click","button[name=view]",function (event) {
-        $(location).attr('href', "../table?aa=bb");
+        var divs = $(event.target).parentsUntil("div[tabid]");
+        var tabid = divs.last().parent().attr("tabid");
+        $(location).attr('href', "../table?tabid="+tabid);
     });
 
 });

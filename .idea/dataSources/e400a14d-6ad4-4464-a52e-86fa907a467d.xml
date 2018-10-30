@@ -461,85 +461,95 @@ model</ColNames>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="104" parent="16" name="presentation">
+    <column id="104" parent="16" name="name">
       <Position>2</Position>
-      <DataType>varchar(300)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="105" parent="16" name="name">
-      <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="106" parent="16" name="sqlite_autoindex_ec_exceltable_1">
+    <column id="105" parent="16" name="presentation">
+      <Position>3</Position>
+      <DataType>varchar(300)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="106" parent="16" name="lastUpdate">
+      <Position>4</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="107" parent="16" name="sqlite_autoindex_ec_exceltable_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="107" parent="16">
+    <key id="108" parent="16">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="108" parent="16">
+    <key id="109" parent="16">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_ec_exceltable_1</UnderlyingIndexName>
     </key>
-    <column id="109" parent="17" name="id">
+    <column id="110" parent="17" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="110" parent="17" name="data">
+    <column id="111" parent="17" name="data">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="111" parent="17" name="excelTable_id">
+    <column id="112" parent="17" name="excelTable_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="112" parent="17" name="ec_tabledata_excelTable_id_a9934714">
+    <column id="113" parent="17" name="lastUpdate">
+      <Position>4</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="114" parent="17" name="ec_tabledata_excelTable_id_a9934714">
       <ColNames>excelTable_id</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <key id="113" parent="17">
+    <key id="115" parent="17">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="114" parent="17">
+    <foreign-key id="116" parent="17">
       <ColNames>excelTable_id</ColNames>
       <RefTableName>ec_exceltable</RefTableName>
       <RefColNames>id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
-    <column id="115" parent="18" name="type">
+    <column id="117" parent="18" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="116" parent="18" name="name">
+    <column id="118" parent="18" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="117" parent="18" name="tbl_name">
+    <column id="119" parent="18" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="118" parent="18" name="rootpage">
+    <column id="120" parent="18" name="rootpage">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
     </column>
-    <column id="119" parent="18" name="sql">
+    <column id="121" parent="18" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="120" parent="19" name="name">
+    <column id="122" parent="19" name="name">
       <Position>1</Position>
     </column>
-    <column id="121" parent="19" name="seq">
+    <column id="123" parent="19" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

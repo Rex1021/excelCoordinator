@@ -23,5 +23,6 @@ urlpatterns = [
     path('index/editTable/', views.edit_table),
     path('index/deleteTable/<int:tabid>/', views.delete_table),
     path('table/', views.view_table),
+    path('table/updateTableData/', views.update_table_data),
     # re_path(r'^index/.*$', views.index)
 ]
