@@ -5,24 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
+    <title>表格编辑</title>
 
     <!-- Bootstrap -->
-    <link href="../static/bootstrap-4.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/bootstrap-4.1.1-dist/css/bootstrap-editable.css" rel="stylesheet">
+    <link href="../static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap-3.3.7-dist/css/bootstrap-editable.css" rel="stylesheet">
+
+    <link href="../static/bootstrap-3.3.7-dist/css/bootstrap-table.min.css" rel="stylesheet">
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-{#    <script src="../static/bootstrap-4.1.1-dist/js/jquery-3.3.1.min.js"></script>#}
-    <script src="../static/bootstrap-4.1.1-dist/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../static/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
 
-    <script src="../static/bootstrap-4.1.1-dist/js/popper.min.js"></script>
+    <script src="../static/bootstrap-3.3.7-dist/js/popper.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <script src="../static/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-    <script src="../static/bootstrap-4.1.1-dist/js/bootstrap-editable.js"></script>
+    <script src="../static/bootstrap-3.3.7-dist/js/bootstrap-editable.js"></script>
 
-    <!--<script src="./bootstrap-4.1.1-dist/js/vue.js"></script>-->
-    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
-
+    <script src="../static/bootstrap-3.3.7-dist/js/bootstrap-table.min.js"></script>
     <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
     <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
     <!--[if lt IE 9]>
@@ -31,8 +30,9 @@
     <![endif]-->
     <style type="text/css">
         body {
-            margin-top: 56px
+            margin-top: 50px
         }
+
         td {
             height: 30px;
             width: 100px;
@@ -40,54 +40,34 @@
     </style>
 </head>
 <body oncontextmenu="return false">
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">首页</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-    </ul>
-    <div class="btn-group">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="save">保存</button>
+<nav class="navbar navbar-fixed-top navbar-inverse container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">excelCoordinator</a>
     </div>
-
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="../index/">首页</a></li>
+        </ul>
+        <div class="btn-group navbar-form pull-right">
+            <button class="btn btn-warning my-2 my-sm-0" id="openEdit">开启编辑</button>
+            <button class="btn btn-warning my-2 my-sm-0" style="display: none;" id="closeEdit">关闭编辑</button>
+            <button class="btn btn-success my-2 my-sm-0" id="save">保存</button>
+        </div>
+    </div>
 </nav>
-<div id="mainDiv" class="table-responsive">
-    <input name="tabid" type="hidden" id="tabid" value="{{ tabid }}"/>
-{#    <table class="table table-bordered table-striped table-hover" id="table">#}
-{#        <tr id="tableHead">#}
-{#            <th id="rowNumber">#</th>#}
-{#            <th>A</th>#}
-{#            <th>B</th>#}
-{#            <th>C</th>#}
-{#            <th>D</th>#}
-{#            <th>E</th>#}
-{#        </tr>#}
-{#        <tbody id="tableBody"></tbody>#}
-
-    <table class="table-bordered" id="table" style="overflow: auto">
+<div class="bootstrap-table">
+<div class="fixed-table-container" style="height: 346px; padding-bottom: 40px;">
+    <div id="mainDiv" class="fixed-table-body">
+        <input name="tabid" type="hidden" id="tabid" value="{{ tabid }}"/>
+        <table class="table table-hover" id="table">
             {% autoescape off %}
                 {{ tableData }}
             {% endautoescape %}
-    </table>
-    <div id="itemMenu" class="dropdown-menu" style="display:none">
-        <li class="dropdown-item" style="display:none" name="numberCell" id="insertRow">插入行</li>
-        <li class="dropdown-item" style="display:none" name="numberCell" id="deleteRow">删除行</li>
-        <li class="dropdown-item">Link</li>
-    </div>
-    <div id="columnMenu" class="dropdown-menu" style="display:none">
-        <li class="dropdown-item" id="insertColumn">插入列</li>
-        <li class="dropdown-item" id="deleteColumn">删除列</li>
+        </table>
     </div>
 </div>
+</div>
+
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="confirmWin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -105,9 +85,16 @@
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
-</div>
 <!-- /.modal -->
-
+<div id="itemMenu" class="list-group col-xs-1 col-sm-1 text-center" style="display:none">
+    <button class="list-group-item" style="display:none" name="numberCell" id="insertRow">插入行</button>
+    <button class="list-group-item" style="display:none" name="numberCell" id="deleteRow">删除行</button>
+    <button class="list-group-item">Link</button>
+</div>
+<div id="columnMenu" class="list-group col-xs-1 col-sm-1 text-center" style="display:none">
+    <button class="list-group-item" id="insertColumn">插入列</button>
+    <button class="list-group-item" id="deleteColumn">删除列</button>
+</div>
 
 <script src="../static/app/js/table.js"></script>
 </body>

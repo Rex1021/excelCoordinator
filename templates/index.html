@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
+    <title>excelCoordinator index</title>
 
     <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"-->
     <!--integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">-->
 
     <!-- Bootstrap -->
-    <link href="../static/bootstrap-4.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-    <script src="../static/bootstrap-4.1.1-dist/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <script src="../static/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 
     <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
@@ -31,97 +31,78 @@
         }
     </style>
 </head>
-<body oncontextmenu="return false">
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <button class="btn btn-outline-success my-2 my-sm-0" id="openCreateWindow">创建表格</button>
-    {#    <ul class="navbar-nav">#}
-    {#        <button class="btn btn-outline-success my-2 my-sm-0">创建表格</button>#}
-    {#        <li class="nav-item">#}
-    {#            <a class="nav-link" href="#">Link</a>#}
-    {#        </li>#}
-    {#        <li class="nav-item">#}
-    {#            <a class="nav-link" href="#">Link</a>#}
-    {#        </li>#}
-    {#        <li class="nav-item">#}
-    {#            <a class="nav-link disabled" href="#">Disabled</a>#}
-    {#        </li>#}
-    {#    </ul>#}
-</nav>
-<div class="container-fluid row" id="tables">
-    {% for table in tables %}
-        <div class="col-3" tabid="{{ table.id }}">
-            <div class="card shadow">
-                <h4 class="bg-success card-header font-weight-normal text-light">{{ table.name }}</h4>
-                <div class="card-body">
-                    <p class="card-text">{{ table.presentation }}</p>
-                    <div class="d-flex justify-content-between align-items-center">
+<body>
+{#<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">#}
+{#    <button class="btn btn-outline-success my-2 my-sm-0" id="openCreateWindow">创建表格</button>#}
+{#</nav>#}
 
-                        <button type="button" name="view" class="btn btn-sm btn-outline-secondary">View</button>
-                        <div class="btn-group">
-                            <button type="button" name="edit" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            <button type="button" name="delete" class="btn btn-sm btn-outline-secondary">Delete</button>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">excelCoordinator</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse navbar-left navbar-form">
+                <button class="btn btn-success " id="openCreateWindow">创建表格</button>
+        </div><!--/.navbar-collapse -->
+</nav>
+
+<div class="container-fluid">
+    <div class="row" id="tables">
+        {% for table in tables %}
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" tabid="{{ table.id }}">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">{{ table.name }}</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-left small" style="height: 100px">{{ table.presentation }}</p>
+                        <button name="view" class="btn btn-sm btn-info">View</button>
+                        <div class="btn-group pull-right">
+                            <button name="edit" class="btn btn-sm btn-warning">Edit</button>
+{#                            <button name="delete" class="btn btn-sm btn-danger">Delete</button>#}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 
-
-    {#    <div class="col-3">#}
-    {#        <div class="card shadow">#}
-    {#            <h4 class="bg-success card-header font-weight-normal text-light">这是一个表格啊</h4>#}
-    {#            <div class="card-body">#}
-    {#                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional#}
-    {#                    content. This content is a little bit longer.</p>#}
-    {#                <div class="d-flex justify-content-between align-items-center">#}
-    {##}
-    {#                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>#}
-    {#                    <div class="btn-group">#}
-    {#                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
-    {#                        <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
-
-
-</div>
 
 <!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form class="container" id="tableContent">
-                {% csrf_token %}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">表格</h4>
                 </div>
-
                 <div class="modal-body">
-                    <input name="id" type="hidden" id="id"/>
-                    <div class="form-label-group">
-                        <label for="title">标题</label>
-                        <input type="text" name="title" id="title" class="form-control" required="" autofocus="">
-                    </div>
-
-                    <div class="form-label-group">
-                        <label for="presentation">内容说明</label>
-                        <textarea class="container" id="presentation" name="presentation"></textarea>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" id="summitTable">提交</button>
-                    </div>
+                    <form class="container-fluid" id="tableContent">
+                        {% csrf_token %}
+                        <input name="id" type="hidden" id="id"/>
+                        <div class="form-group">
+                            <label for="title">标题</label>
+                            <input type="text" name="title" id="title" class="form-control" required="" autofocus="">
+                        </div>
+                        <div class="form-group">
+                            <label for="presentation">内容说明</label>
+                            <textarea class="form-control" id="presentation" name="presentation"></textarea>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="summitTable">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
 <!-- /.modal -->
-
+</div>
 <script src="../static/app/js/index.js"></script>
 </body>
 </html>

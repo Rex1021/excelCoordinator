@@ -909,7 +909,6 @@
             this.formOptions.scope = this.$element[0];
 
             this.initContainer();
-            console.log(this);
 
             //flag to hide container, when saving value will finish
             this.delayedHide = false;

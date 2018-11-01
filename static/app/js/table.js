@@ -3,7 +3,7 @@ $(function () {
         //10转26进制 从下标得到列名 如:26 = BA
         getColumn: function (columnIndex) {
             var column = String.fromCharCode(65 + (columnIndex%26));
-            var multiple = parseInt(columnIndex / 26);
+            var multiple = parseInt(columnIndex/26);
             if (multiple > 0) {
                 column = this.getColumn(multiple)+column;
             }
@@ -23,23 +23,22 @@ $(function () {
                     itemTd.setAttribute("rowIndex",i);
                     var columnIndex = utils.getColumn(j - 1);
                     itemTd.setAttribute("columnIndex", columnIndex);
-                    if(columnIndex == '@'){
+                    if(columnIndex === '@'){
                         itemTd.innerHTML=i;
                     }
                 });
             });
         }
     };
-
-    $('td').editable({
-        mode: 'inline',
-        type: 'number',
-        step: '1.00',
-        min: '0.00',
-        max: '24'
-    });
-
     window.utils = utils;
+
+
+    // $("td[columnindex!='@']").editable({
+    //     emptytext:'',
+    //     disabled:true
+    // });
+
+
     // var data = [
     //     {param1: "1,001", param2: "Lorem", param3: "ipsum", param4: "dolor", param5: "sit"},
     //     {param1: "1,002", param2: "amet", param3: "consectetur", param4: "adipiscing", param5: "elit"},
@@ -82,8 +81,8 @@ $(function () {
         window.row = event.target.innerHTML;
         $("#columnMenu").hide("fast");
         var itemMenu = $("#itemMenu");
-        var lis = itemMenu.find("li[name='numberCell']");
-        if(event.target.getAttribute("columnIndex") == '@'){
+        var lis = itemMenu.find("button[name='numberCell']");
+        if(event.target.getAttribute("columnIndex") === '@'){
             lis.show();
         }else {
             lis.hide();
@@ -99,7 +98,7 @@ $(function () {
         function (event) {
             $("#itemMenu").hide("fast");
             window.column = event.target.innerHTML;
-            if (window.column == '#') return false;
+            if (window.column === '#') return false;
 
             var columnMenu = $("#columnMenu");
             columnMenu.hide();
@@ -178,9 +177,28 @@ $(function () {
         var tabid = $("#tabid").val();
         var tableData = $("#table").html().replace(/(\n|\r)/g,"").replace(/\s+<tbody>/,"<tbody>");
         $.post("./updateTableData/",{"tabid":tabid,"tableData":tableData},function (msg) {
-            console.log(msg);
+            if("ok" === msg){
+                $("#confirmWin").modal("hide");
+            }else {
+                alert("保存失败:"+msg);
+            }
         });
     });
 
-
+    //开启编辑
+    $("#openEdit").click(function () {
+        var tabid = $("#tabid").val();
+        $("#table .editable").editable('toggleDisabled');
+        $(this).hide();
+        $("#closeEdit").show();
+        // $("#table .editable").disable();
+    });
+    //关闭编辑
+    $("#closeEdit").click(function () {
+        var tabid = $("#tabid").val();
+        $("#table .editable").editable('toggleDisabled');
+        $(this).hide();
+        $("#openEdit").show();
+        // $("#table .editable").disable();
+    });
 });
